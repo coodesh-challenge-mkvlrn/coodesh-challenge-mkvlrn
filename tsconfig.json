@@ -2,10 +2,14 @@
   "compilerOptions": {
     "module": "CommonJS",
     "target": "ESNext",
-    "lib": ["ESNext"],
+    "lib": [
+      "ESNext"
+    ],
     "baseUrl": "./",
     "paths": {
-      "#/*": ["src/*"]
+      "#/*": [
+        "src/*"
+      ]
     },
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
@@ -21,8 +25,14 @@
     "skipLibCheck": true,
     "strict": true
   },
-  "include": ["./src", "./test", "*.config.*"],
+  "include": [
+    "./src",
+    "./test",
+    "*.config.*"
+  ],
   "ts-node": {
-    "require": ["tsconfig-paths/register"]
+    "require": [
+      "tsconfig-paths/register"
+    ]
   }
 }
