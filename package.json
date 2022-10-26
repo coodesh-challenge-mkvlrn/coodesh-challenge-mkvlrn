@@ -11,6 +11,8 @@
     "start": "node build"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
     "@types/node": "^18.11.7",
     "nodemon": "^2.0.20",
     "rimraf": "^3.0.2",
