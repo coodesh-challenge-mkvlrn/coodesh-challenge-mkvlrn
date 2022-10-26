@@ -1,0 +1,22 @@
+{
+  "name": "coodesh-challenge-nodejs-20201030",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Mike Valeriano <mkvlrn@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "npx tsc -p tsconfig.build.json && npx tsc-alias -p tsconfig.build.json",
+    "prebuild": "npx rimraf build",
+    "dev": "npx nodemon --ext ts --exec ts-node src/index.ts",
+    "start": "node build"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.7",
+    "nodemon": "^2.0.20",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.9.1",
+    "tsc-alias": "^1.7.0",
+    "tsconfig-paths": "^4.1.0",
+    "typescript": "^4.8.4"
+  }
+}
