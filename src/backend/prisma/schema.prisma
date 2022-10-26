@@ -3,6 +3,27 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
+}
+
+enum ProductStatus {
+  DRAFT
+  TRASH
+  PUBLISHED
+}
+
+model Product {
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
+  code         Int           @unique
+  barcode      String
+  status       ProductStatus @default(DRAFT)
+  imported_t   DateTime      @default(now())
+  url          String
+  product_name String
+  quantity     String
+  categories   String
+  packaging    String
+  brands       String
+  image_url    String
 }
