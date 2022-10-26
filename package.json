@@ -48,5 +48,8 @@
     "tsc-files": "^1.1.3",
     "tsconfig-paths": "^4.1.0",
     "typescript": "^4.8.4"
+  },
+  "prisma": {
+    "schema": "src/backend/prisma/schema.prisma"
   }
 }
