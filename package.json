@@ -4,6 +4,10 @@
   "main": "index.js",
   "author": "Mike Valeriano <mkvlrn@gmail.com>",
   "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "src/*"
+  ],
   "scripts": {
     "build": "npx tsc -p tsconfig.build.json && npx tsc-alias -p tsconfig.build.json",
     "prebuild": "npx rimraf build",
