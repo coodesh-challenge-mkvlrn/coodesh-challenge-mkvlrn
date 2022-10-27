@@ -36,6 +36,18 @@ export class HealthCheckService {
     return memoryUsage;
   }
 
+  async lastScan() {
+    try {
+      const last = await this.orm.scan.findFirst({
+        where: { complete: true },
+        orderBy: { date: 'desc' },
+      });
+      return last ? dayjs(last.date).format() : null;
+    } catch (err) {
+      return null;
+    }
+  }
+
   private formatMemoryUsage(data: number) {
     return `${Math.round((data / 1024 / 1024) * 100) / 100} MB`;
   }

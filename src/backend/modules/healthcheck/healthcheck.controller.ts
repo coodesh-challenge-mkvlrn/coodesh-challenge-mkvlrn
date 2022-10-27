@@ -11,7 +11,8 @@ export class HealthCheckController {
     const uptime = this.service.uptime();
     const databaseOK = await this.service.db();
     const memory = this.service.memory();
+    const lastScan = await this.service.lastScan();
 
-    return res.json({ uptime, databaseOK, memory });
+    return res.json({ uptime, databaseOK, memory, lastScan });
   };
 }
