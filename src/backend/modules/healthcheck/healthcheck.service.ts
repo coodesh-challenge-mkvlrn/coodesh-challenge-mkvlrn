@@ -44,7 +44,7 @@ export class HealthCheckService {
       });
       return last ?? null;
     } catch (err) {
-      return null;
+      return { error: 'failed while trying to get last scan data' };
     }
   }
 
