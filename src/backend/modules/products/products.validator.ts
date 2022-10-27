@@ -15,4 +15,10 @@ export class ProductsValidator {
       product_name: Joi.string().required().not().empty(),
     }),
   });
+
+  deleteOne = celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+      code: Joi.number().required(),
+    }),
+  });
 }

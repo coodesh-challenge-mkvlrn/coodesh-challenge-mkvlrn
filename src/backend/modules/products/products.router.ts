@@ -24,6 +24,10 @@ export class ProductsRouter {
       this.validator.updateOne,
       asyncHandler(this.controller.updateOne),
     );
-    this.routes.delete('/:code', asyncHandler(this.controller.deleteOne));
+    this.routes.delete(
+      '/:code',
+      this.validator.deleteOne,
+      asyncHandler(this.controller.deleteOne),
+    );
   }
 }
