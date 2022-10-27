@@ -9,7 +9,9 @@ export class HealthCheckController {
 
   root = async (_req: Request, res: Response) => {
     const uptime = this.service.uptime();
+    const databaseOK = await this.service.db();
+    const memory = this.service.memory();
 
-    return res.json({ uptime });
+    return res.json({ uptime, databaseOK, memory });
   };
 }
