@@ -15,20 +15,20 @@ export class ProductsController {
 
   getOne = async (req: Request, res: Response) => {
     const { code } = req.params;
-    const result = await this.service.getOne(+code);
+    const result = await this.service.getOne(code);
     return res.json(result);
   };
 
   updateOne = async (req: Request, res: Response) => {
     const { code } = req.params;
     const { update } = req.body;
-    const result = await this.service.updateOne(+code, update);
+    const result = await this.service.updateOne(code, update);
     return res.json(result);
   };
 
   deleteOne = async (req: Request, res: Response) => {
     const { code } = req.params;
-    const result = await this.service.deleteOne(+code);
+    const result = await this.service.deleteOne(code);
     return res.json(result);
   };
 }

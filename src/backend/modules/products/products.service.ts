@@ -20,7 +20,7 @@ export class ProductsService {
     }
   }
 
-  async getOne(code: number) {
+  async getOne(code: string) {
     try {
       const product = await this.orm.product.findUnique({
         where: { code },
@@ -38,7 +38,7 @@ export class ProductsService {
     }
   }
 
-  async updateOne(code: number, update: UpdateProductDto) {
+  async updateOne(code: string, update: UpdateProductDto) {
     try {
       const product = await this.orm.product.findUnique({ where: { code } });
 
@@ -54,7 +54,7 @@ export class ProductsService {
     }
   }
 
-  async deleteOne(code: number) {
+  async deleteOne(code: string) {
     try {
       const product = await this.orm.product.findUnique({ where: { code } });
 

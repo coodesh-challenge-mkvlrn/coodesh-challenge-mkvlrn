@@ -57,14 +57,14 @@ describe('products.services.ts', () => {
           product: {
             findUnique: jest
               .fn()
-              .mockResolvedValue(createMock<Product>({ code: 123456 })),
+              .mockResolvedValue(createMock<Product>({ code: '123456' })),
           },
         }),
       );
 
-      const result = await service.getOne(123456);
+      const result = await service.getOne('123456');
 
-      expect(result.code).toBe(123456);
+      expect(result.code).toBe('123456');
     });
 
     test('throws on db error', async () => {
@@ -78,7 +78,7 @@ describe('products.services.ts', () => {
         }),
       );
 
-      const act = () => service.getOne(123456);
+      const act = () => service.getOne('123456');
 
       await expect(act).rejects.toEqual<AppError>(
         expect.objectContaining({
@@ -98,7 +98,7 @@ describe('products.services.ts', () => {
         }),
       );
 
-      const act = () => service.getOne(123456);
+      const act = () => service.getOne('123456');
 
       await expect(act).rejects.toEqual<AppError>(
         expect.objectContaining({
@@ -125,7 +125,7 @@ describe('products.services.ts', () => {
         }),
       );
 
-      const result = await service.updateOne(123456, {
+      const result = await service.updateOne('123456', {
         product_name: 'updated name',
       });
 
@@ -144,7 +144,7 @@ describe('products.services.ts', () => {
       );
 
       const act = () =>
-        service.updateOne(123456, { product_name: 'updated name' });
+        service.updateOne('123456', { product_name: 'updated name' });
 
       await expect(act).rejects.toEqual<AppError>(
         expect.objectContaining({
@@ -164,7 +164,7 @@ describe('products.services.ts', () => {
         }),
       );
 
-      const act = () => service.updateOne(123456, { product_name: 'hue' });
+      const act = () => service.updateOne('123456', { product_name: 'hue' });
 
       await expect(act).rejects.toEqual<AppError>(
         expect.objectContaining({
@@ -184,14 +184,14 @@ describe('products.services.ts', () => {
             findUnique: jest.fn().mockResolvedValue(createMock<Product>()),
             delete: jest
               .fn()
-              .mockResolvedValue(createMock<Product>({ code: 123456 })),
+              .mockResolvedValue(createMock<Product>({ code: '123456' })),
           },
         }),
       );
 
-      const result = await service.deleteOne(123456);
+      const result = await service.deleteOne('123456');
 
-      expect(result.code).toBe(123456);
+      expect(result.code).toBe('123456');
     });
 
     test('throws on db error', async () => {
@@ -205,7 +205,7 @@ describe('products.services.ts', () => {
         }),
       );
 
-      const act = () => service.deleteOne(123456);
+      const act = () => service.deleteOne('123456');
 
       await expect(act).rejects.toEqual<AppError>(
         expect.objectContaining({
@@ -225,7 +225,7 @@ describe('products.services.ts', () => {
         }),
       );
 
-      const act = () => service.deleteOne(123456);
+      const act = () => service.deleteOne('123456');
 
       await expect(act).rejects.toEqual<AppError>(
         expect.objectContaining({
