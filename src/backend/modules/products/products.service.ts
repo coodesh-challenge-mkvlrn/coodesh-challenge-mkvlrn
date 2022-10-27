@@ -10,10 +10,20 @@ export class ProductsService {
 
   async getMany(page: number) {
     try {
-      return await this.orm.product.findMany({
+      const totalProducts = await this.orm.product.count();
+      const totalPages = Math.ceil(totalProducts / 10);
+      const data = await this.orm.product.findMany({
         take: 10,
         skip: 10 * (page - 1),
       });
+
+      return {
+        totalProducts,
+        totalPages,
+        productsPerPage: 10,
+        currentPage: page,
+        data,
+      };
     } catch (err) {
       const { message } = err as Error;
       throw new AppError(ErrorType.INTERNAL_SERVER_ERROR, message);

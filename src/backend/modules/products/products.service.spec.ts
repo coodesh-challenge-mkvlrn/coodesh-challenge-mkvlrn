@@ -12,6 +12,7 @@ describe('products.services.ts', () => {
       const service = new ProductsService(
         createMock<PrismaClient>({
           product: {
+            count: jest.fn().mockResolvedValue(1),
             findMany: jest
               .fn()
               .mockResolvedValue([
@@ -23,15 +24,18 @@ describe('products.services.ts', () => {
 
       const result = await service.getMany(1);
 
-      expect(result).toHaveLength(1);
-      expect(result[0].product_name).toBe('mock');
+      expect(result.totalProducts).toBe(1);
+      expect(result.productsPerPage).toBe(10);
+      expect(result.currentPage).toBe(1);
+      expect(result.data).toHaveLength(1);
+      expect(result.data[0].product_name).toBe('mock');
     });
 
     test('throws on db error', async () => {
       const service = new ProductsService(
         createMock<PrismaClient>({
           product: {
-            findMany: jest.fn().mockImplementation(() => {
+            count: jest.fn().mockImplementation(() => {
               throw new Error('database exploded');
             }),
           },
