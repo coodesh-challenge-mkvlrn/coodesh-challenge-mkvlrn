@@ -11,9 +11,12 @@ export class AppError extends Error {
 
   public type: string;
 
+  public message: string;
+
   constructor(type: ErrorType, message: string) {
     super(message);
     this.statusCode = +type;
     this.type = ErrorType[type];
+    this.message = message;
   }
 }
