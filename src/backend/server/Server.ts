@@ -11,6 +11,7 @@ export class Server {
   }
 
   start(port: number) {
+    // eslint-disable-next-line no-console
     return this.app.listen(port, () => console.log(`server up @${port}`));
   }
 }
