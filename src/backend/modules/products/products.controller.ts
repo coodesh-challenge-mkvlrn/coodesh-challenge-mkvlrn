@@ -21,8 +21,7 @@ export class ProductsController {
 
   updateOne = async (req: Request, res: Response) => {
     const { code } = req.params;
-    const { update } = req.body;
-    const result = await this.service.updateOne(code, update);
+    const result = await this.service.updateOne(code, req.body);
     return res.json(result);
   };
 
