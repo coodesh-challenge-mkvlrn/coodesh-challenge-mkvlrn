@@ -1,0 +1,108 @@
+{
+  "healthcheck": {
+    "properties": {
+      "uptime": {
+        "type": "string",
+        "example": "0000-00-00T00:05:43"
+      },
+      "databaseOK": {
+        "type": "boolean",
+        "example": true
+      },
+      "memory": {
+        "type": "object",
+        "properties": {
+          "rss": {
+            "type": "string",
+            "example": "345.99 MB"
+          },
+          "heapTotal": {
+            "type": "string",
+            "example": "187.34 MB"
+          },
+          "heapUsed": {
+            "type": "string",
+            "example": "181.57 MB"
+          },
+          "external": {
+            "type": "string",
+            "example": "4.08 MB"
+          }
+        }
+      },
+      "lastScan": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "example": "2022-10-27T12:06:05.136Z"
+          },
+          "status": {
+            "type": "string",
+            "example": "SUCCESS"
+          },
+          "new_products": {
+            "type": "number",
+            "example": 100
+          },
+          "message": {
+            "type": "string",
+            "example": null
+          }
+        }
+      }
+    }
+  },
+  "product": {
+    "properties": {
+      "id": {
+        "type": "string",
+        "example": "1522d6e5-c262-4f89-974d-127a2b4edd5b"
+      },
+      "code": {
+        "type": "string",
+        "example": "8000500329474"
+      },
+      "barcode": {
+        "type": "string",
+        "example": "8000500329474 (EAN / EAN-13)"
+      },
+      "status": {
+        "type": "string",
+        "example": "PUBLISHED"
+      },
+      "imported_t": {
+        "type": "string",
+        "example": "2022-10-27 11:28:19.009"
+      },
+      "url": {
+        "type": "string",
+        "example": "https://world.openfoodfacts.org/product/8000500329474"
+      },
+      "product_name": {
+        "type": "string",
+        "example": "Biscuits Kinder CereAlé chocolat noir 2x6"
+      },
+      "quantity": {
+        "type": "string",
+        "example": "204 g"
+      },
+      "categories": {
+        "type": "string",
+        "example": "Plant-based foods and beverages, Plant-based foods, Snacks, Cereals and potatoes, Seeds, Spreads, Sweet snacks, Cereals and their products, Plant-based spreads, Bars, Biscuits and cakes, Cereal grains, Biscuits, Cereal bars, Oilseed purees, Chocolate biscuits, Cereal butters, Biscuits petit déjeuner, Imbiss, Kekse, Kekse und Kuchen, Süßer Snack"
+      },
+      "packaging": {
+        "type": "string",
+        "example": "Film, Wrapper, Stück"
+      },
+      "brands": {
+        "type": "string",
+        "example": "Kinder"
+      },
+      "image_url": {
+        "type": "string",
+        "example": "https://static.openfoodfacts.org/images/products/800/050/032/9474/front_en.81.400.jpg"
+      }
+    }
+  }
+}

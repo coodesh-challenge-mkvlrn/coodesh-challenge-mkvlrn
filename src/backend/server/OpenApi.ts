@@ -1,5 +1,7 @@
 import swaggerJSDoc, { Options } from 'swagger-jsdoc';
 
+import schemas from '#/backend/server/openapi-schemas.json';
+
 const options: Options = {
   failOnErrors: true,
   definition: {
@@ -9,7 +11,7 @@ const options: Options = {
       version: '1.0.0',
     },
     components: {
-      healthcheck: {},
+      schemas,
     },
   },
   apis: ['./modules/**/*.router.ts'],
