@@ -90,7 +90,7 @@ const config: WebpackConfiguration = {
     open: true,
     historyApiFallback: true,
     hot: true,
-    port: 3000,
+    port: +process.env.FRONTEND_PORT! || 3000,
   },
 };
 
