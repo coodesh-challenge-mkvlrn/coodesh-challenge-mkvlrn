@@ -26,4 +26,6 @@ model Product {
   packaging    String
   brands       String
   image_url    String
+
+  @@map("products")
 }
