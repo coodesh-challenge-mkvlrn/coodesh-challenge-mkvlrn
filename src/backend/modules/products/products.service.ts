@@ -16,7 +16,7 @@ export class ProductsService {
       });
     } catch (err) {
       const { message } = err as Error;
-      throw new AppError(ErrorType.INTERNAL_SERVER_ERROR.toString(), message);
+      throw new AppError(ErrorType.INTERNAL_SERVER_ERROR, message);
     }
   }
 
@@ -27,17 +27,14 @@ export class ProductsService {
       });
 
       if (!product)
-        throw new AppError(
-          ErrorType.NOT_FOUND.toString(),
-          'product not found in db',
-        );
+        throw new AppError(ErrorType.NOT_FOUND, 'product not found in db');
 
       return product;
     } catch (err) {
       if (err instanceof AppError) throw err;
 
       const { message } = err as Error;
-      throw new AppError(ErrorType.INTERNAL_SERVER_ERROR.toString(), message);
+      throw new AppError(ErrorType.INTERNAL_SERVER_ERROR, message);
     }
   }
 
@@ -46,17 +43,14 @@ export class ProductsService {
       const product = await this.orm.product.findUnique({ where: { code } });
 
       if (!product)
-        throw new AppError(
-          ErrorType.NOT_FOUND.toString(),
-          'product not found in db',
-        );
+        throw new AppError(ErrorType.NOT_FOUND, 'product not found in db');
 
       return await this.orm.product.update({ where: { code }, data: update });
     } catch (err) {
       if (err instanceof AppError) throw err;
 
       const { message } = err as Error;
-      throw new AppError(ErrorType.INTERNAL_SERVER_ERROR.toString(), message);
+      throw new AppError(ErrorType.INTERNAL_SERVER_ERROR, message);
     }
   }
 }

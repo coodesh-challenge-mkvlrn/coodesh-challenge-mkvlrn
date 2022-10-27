@@ -4,7 +4,7 @@ import '@prisma/client/runtime';
 import 'reflect-metadata';
 
 import { ProductsService } from '#/backend/modules/products/products.service';
-import { AppError, ErrorType } from '#/backend/server/AppError';
+import { AppError } from '#/backend/server/AppError';
 
 describe('products.services.ts', () => {
   describe('getMany', () => {
@@ -44,7 +44,7 @@ describe('products.services.ts', () => {
         expect.objectContaining({
           statusCode: 500,
           message: 'database exploded',
-          type: ErrorType.INTERNAL_SERVER_ERROR.toString(),
+          type: 'INTERNAL_SERVER_ERROR',
         }),
       );
     });
@@ -84,7 +84,7 @@ describe('products.services.ts', () => {
         expect.objectContaining({
           statusCode: 500,
           message: 'database exploded',
-          type: ErrorType.INTERNAL_SERVER_ERROR.toString(),
+          type: 'INTERNAL_SERVER_ERROR',
         }),
       );
     });
@@ -104,7 +104,7 @@ describe('products.services.ts', () => {
         expect.objectContaining({
           statusCode: 404,
           message: 'product not found in db',
-          type: ErrorType.NOT_FOUND.toString(),
+          type: 'NOT_FOUND',
         }),
       );
     });
@@ -150,7 +150,7 @@ describe('products.services.ts', () => {
         expect.objectContaining({
           statusCode: 500,
           message: 'database exploded',
-          type: ErrorType.INTERNAL_SERVER_ERROR.toString(),
+          type: 'INTERNAL_SERVER_ERROR',
         }),
       );
     });
@@ -164,7 +164,7 @@ describe('products.services.ts', () => {
         expect.objectContaining({
           statusCode: 404,
           message: 'product not found in db',
-          type: ErrorType.NOT_FOUND.toString(),
+          type: 'NOT_FOUND',
         }),
       );
     });
