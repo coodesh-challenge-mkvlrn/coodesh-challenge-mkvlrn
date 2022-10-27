@@ -29,3 +29,12 @@ model Product {
 
   @@map("products")
 }
+
+model Scan {
+  id           String   @id @default(uuid())
+  date         DateTime @default(now())
+  new_products Int
+  complete     Boolean  @default(false)
+
+  @@map("scans")
+}
