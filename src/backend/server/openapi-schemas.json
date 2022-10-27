@@ -104,5 +104,53 @@
         "example": "https://static.openfoodfacts.org/images/products/800/050/032/9474/front_en.81.400.jpg"
       }
     }
+  },
+  "errorInternal": {
+    "properties": {
+      "statusCode": {
+        "type": "number",
+        "example": 500
+      },
+      "type": {
+        "type": "string",
+        "example": "INTERNAL_SERVER_ERROR"
+      },
+      "message": {
+        "type": "string",
+        "example": "database exploded"
+      }
+    }
+  },
+  "errorBadUpdate": {
+    "properties": {
+      "statusCode": {
+        "type": "number",
+        "example": 400
+      },
+      "type": {
+        "type": "string",
+        "example": "BAD_REQUEST"
+      },
+      "message": {
+        "type": "string",
+        "example": "'product_name' is required"
+      }
+    }
+  },
+  "errorNotFound": {
+    "properties": {
+      "statusCode": {
+        "type": "number",
+        "example": 404
+      },
+      "type": {
+        "type": "string",
+        "example": "NOT_FOUND"
+      },
+      "message": {
+        "type": "string",
+        "example": "product not found in db"
+      }
+    }
   }
 }
