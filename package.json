@@ -9,10 +9,10 @@
     "src/*"
   ],
   "scripts": {
-    "build": "npx tsc -p tsconfig.build.json && npx tsc-alias -p tsconfig.build.json",
     "prebuild": "npx rimraf build",
+    "build": "yarn backend:build",
+    "backend:build": "npx tsc -p src/backend/tsconfig.build.json && npx tsc-alias -p src/backend/tsconfig.build.json",
     "backend:dev": "dotenv -e .env -- yarn workspace @cm/backend dev",
-    "start": "node build",
     "test": "jest",
     "prepare": "npx husky install"
   },
