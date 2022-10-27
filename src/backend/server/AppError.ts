@@ -9,7 +9,7 @@ export enum ErrorType {
 export class AppError extends Error {
   public statusCode: number;
 
-  constructor(public type: ErrorType, message: string) {
+  constructor(public type: string, message: string) {
     super(message);
     this.statusCode = +type;
   }
