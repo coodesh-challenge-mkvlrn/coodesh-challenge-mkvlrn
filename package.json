@@ -11,7 +11,7 @@
   "scripts": {
     "build": "npx tsc -p tsconfig.build.json && npx tsc-alias -p tsconfig.build.json",
     "prebuild": "npx rimraf build",
-    "backend:dev": "dotenv -e .env.dev -- yarn workspace @cm/backend dev",
+    "backend:dev": "dotenv -e .env -- yarn workspace @cm/backend dev",
     "start": "node build",
     "test": "jest",
     "prepare": "npx husky install"
@@ -26,6 +26,8 @@
     "@types/jest": "^29.2.0",
     "@types/node": "^18.11.7",
     "@types/node-cron": "^3.0.4",
+    "@types/swagger-jsdoc": "^6.0.1",
+    "@types/swagger-ui-express": "^4.1.3",
     "@typescript-eslint/eslint-plugin": "^5.41.0",
     "@typescript-eslint/parser": "^5.41.0",
     "dotenv-cli": "^6.0.0",
