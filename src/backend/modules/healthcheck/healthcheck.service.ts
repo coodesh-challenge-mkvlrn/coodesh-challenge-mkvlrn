@@ -40,8 +40,9 @@ export class HealthCheckService {
     try {
       const last = await this.orm.scan.findFirst({
         orderBy: { date: 'desc' },
+        select: { date: true, status: true, new_products: true, message: true },
       });
-      return last ? dayjs(last.date).format() : null;
+      return last ?? null;
     } catch (err) {
       return null;
     }

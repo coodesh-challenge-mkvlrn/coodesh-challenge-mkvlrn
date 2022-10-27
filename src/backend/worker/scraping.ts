@@ -14,7 +14,7 @@ import { parseProduct } from '#/backend/worker/parse-product';
 
   try {
     const client = axios.create({
-      baseURL: 'https://world.openfoodfacts.orga',
+      baseURL: 'https://world.openfoodfacts.org',
     });
 
     Logger.info('fetching frontpage data...');
