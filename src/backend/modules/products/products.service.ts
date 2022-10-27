@@ -18,4 +18,22 @@ export class ProductsService {
       throw new AppError(ErrorType.INTERNAL_SERVER_ERROR, message);
     }
   }
+
+  async getOne(code: number) {
+    try {
+      const product = await this.orm.product.findUnique({
+        where: { code },
+      });
+
+      if (!product)
+        throw new AppError(ErrorType.NOT_FOUND, 'product not found in db');
+
+      return product;
+    } catch (err) {
+      if (err instanceof AppError) throw err;
+
+      const { message } = err as Error;
+      throw new AppError(ErrorType.INTERNAL_SERVER_ERROR, message);
+    }
+  }
 }
