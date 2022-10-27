@@ -53,4 +53,20 @@ export class ProductsService {
       throw new AppError(ErrorType.INTERNAL_SERVER_ERROR, message);
     }
   }
+
+  async deleteOne(code: number) {
+    try {
+      const product = await this.orm.product.findUnique({ where: { code } });
+
+      if (!product)
+        throw new AppError(ErrorType.NOT_FOUND, 'product not found in db');
+
+      return await this.orm.product.delete({ where: { code } });
+    } catch (err) {
+      if (err instanceof AppError) throw err;
+
+      const { message } = err as Error;
+      throw new AppError(ErrorType.INTERNAL_SERVER_ERROR, message);
+    }
+  }
 }

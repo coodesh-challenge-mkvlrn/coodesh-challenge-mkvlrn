@@ -156,9 +156,76 @@ describe('products.services.ts', () => {
     });
 
     test('throws on not found', async () => {
-      const service = new ProductsService(new PrismaClient());
+      const service = new ProductsService(
+        createMock<PrismaClient>({
+          product: {
+            findUnique: jest.fn().mockResolvedValue(null),
+          },
+        }),
+      );
 
       const act = () => service.updateOne(123456, { product_name: 'hue' });
+
+      await expect(act).rejects.toEqual<AppError>(
+        expect.objectContaining({
+          statusCode: 404,
+          message: 'product not found in db',
+          type: 'NOT_FOUND',
+        }),
+      );
+    });
+  });
+
+  describe('deleteOne', () => {
+    test('returns ok', async () => {
+      const service = new ProductsService(
+        createMock<PrismaClient>({
+          product: {
+            findUnique: jest.fn().mockResolvedValue(createMock<Product>()),
+            delete: jest
+              .fn()
+              .mockResolvedValue(createMock<Product>({ code: 123456 })),
+          },
+        }),
+      );
+
+      const result = await service.deleteOne(123456);
+
+      expect(result.code).toBe(123456);
+    });
+
+    test('throws on db error', async () => {
+      const service = new ProductsService(
+        createMock<PrismaClient>({
+          product: {
+            findUnique: jest.fn().mockImplementation(() => {
+              throw new Error('database exploded');
+            }),
+          },
+        }),
+      );
+
+      const act = () => service.deleteOne(123456);
+
+      await expect(act).rejects.toEqual<AppError>(
+        expect.objectContaining({
+          statusCode: 500,
+          message: 'database exploded',
+          type: 'INTERNAL_SERVER_ERROR',
+        }),
+      );
+    });
+
+    test('throws on not found', async () => {
+      const service = new ProductsService(
+        createMock<PrismaClient>({
+          product: {
+            findUnique: jest.fn().mockResolvedValue(null),
+          },
+        }),
+      );
+
+      const act = () => service.deleteOne(123456);
 
       await expect(act).rejects.toEqual<AppError>(
         expect.objectContaining({
