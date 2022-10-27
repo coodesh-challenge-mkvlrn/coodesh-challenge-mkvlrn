@@ -11,7 +11,7 @@
   "scripts": {
     "build": "npx tsc -p tsconfig.build.json && npx tsc-alias -p tsconfig.build.json",
     "prebuild": "npx rimraf build",
-    "dev": "yarn workspace @cm/backend dev",
+    "backend:dev": "yarn workspace @cm/backend dev",
     "start": "node build",
     "test": "jest",
     "prepare": "npx husky install"
