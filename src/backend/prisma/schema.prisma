@@ -15,17 +15,17 @@ enum ProductStatus {
 
 model Product {
   id           String        @id @default(uuid())
-  code         Int           @unique
+  code         String        @unique
   barcode      String
   status       ProductStatus @default(DRAFT)
   imported_t   DateTime      @default(now())
   url          String
   product_name String
-  quantity     String
-  categories   String
-  packaging    String
-  brands       String
-  image_url    String
+  quantity     String?
+  categories   String?
+  packaging    String?
+  brands       String?
+  image_url    String?
 
   @@map("products")
 }
