@@ -33,7 +33,7 @@ model Product {
 model Scan {
   id           String   @id @default(uuid())
   date         DateTime @default(now())
-  new_products Int
+  new_products Int      @default(0)
   complete     Boolean  @default(false)
 
   @@map("scans")

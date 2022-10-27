@@ -40,7 +40,8 @@
   "ignorePatterns": [
     "node_modules",
     "build",
-    "coverage"
+    "coverage",
+    "**/*.js"
   ],
   "rules": {
     "jsx-a11y/label-has-associated-control": "off",
