@@ -5,4 +5,4 @@ import { Server } from '#/backend/server/Server';
 dotenvConfig();
 const server = new Server();
 
-server.start(4000);
+server.start(+process.env.BACKEND_PORT! || 4001);
