@@ -19,7 +19,11 @@ export class ProductsRouter {
       this.validator.getOne,
       asyncHandler(this.controller.getOne),
     );
-    this.routes.put('/:code', asyncHandler(this.controller.updateOne));
+    this.routes.put(
+      '/:code',
+      this.validator.updateOne,
+      asyncHandler(this.controller.updateOne),
+    );
     this.routes.delete('/:code', asyncHandler(this.controller.deleteOne));
   }
 }
