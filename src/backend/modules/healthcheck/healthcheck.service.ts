@@ -39,7 +39,6 @@ export class HealthCheckService {
   async lastScan() {
     try {
       const last = await this.orm.scan.findFirst({
-        where: { complete: true },
         orderBy: { date: 'desc' },
       });
       return last ? dayjs(last.date).format() : null;

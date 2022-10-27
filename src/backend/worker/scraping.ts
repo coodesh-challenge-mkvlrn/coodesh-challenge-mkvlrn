@@ -1,4 +1,4 @@
-import { PrismaClient, Product } from '@prisma/client';
+import { PrismaClient, Product, ScanStatus } from '@prisma/client';
 import axios from 'axios';
 import { JSDOM } from 'jsdom';
 import { performance } from 'perf_hooks';
@@ -9,11 +9,13 @@ import { parseProduct } from '#/backend/worker/parse-product';
 
 (async () => {
   Logger.info('⛏️  SCRAPING STARTED 🏁');
+  const prisma = new PrismaClient();
+  const scan = await prisma.scan.create({ data: {} });
 
   try {
-    const prisma = new PrismaClient();
-    const client = axios.create({ baseURL: 'https://world.openfoodfacts.org' });
-    const scan = await prisma.scan.create({ data: { new_products: 0 } });
+    const client = axios.create({
+      baseURL: 'https://world.openfoodfacts.orga',
+    });
 
     Logger.info('fetching frontpage data...');
     let t0 = performance.now();
@@ -57,15 +59,23 @@ import { parseProduct } from '#/backend/worker/parse-product';
     t1 = performance.now();
     Logger.info(`done in ${((t1 - t0) / 1000).toFixed(3)}s`);
 
-    // persisting scan data
     await prisma.scan.update({
       where: { id: scan.id },
-      data: { complete: true, new_products: result.count },
+      data: { status: ScanStatus.SUCCESS, new_products: result.count },
     });
+
     parentPort?.postMessage(
       `⛏️  SCRAPING SUCCESSFUL: ${result.count} products added ✅`,
     );
   } catch (err) {
+    await prisma.scan.update({
+      where: { id: scan.id },
+      data: {
+        status: ScanStatus.FAILED,
+        new_products: 0,
+        message: (err as Error).message,
+      },
+    });
     parentPort?.postMessage('⛏️  SCRAPING FAILED ❌');
   }
 })();

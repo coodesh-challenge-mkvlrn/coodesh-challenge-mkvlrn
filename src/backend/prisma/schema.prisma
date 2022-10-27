@@ -17,7 +17,7 @@ model Product {
   id           String        @id @default(uuid())
   code         String        @unique
   barcode      String
-  status       ProductStatus @default(DRAFT)
+  status       ProductStatus @default(PUBLISHED)
   imported_t   DateTime      @default(now())
   url          String
   product_name String
@@ -30,11 +30,18 @@ model Product {
   @@map("products")
 }
 
+enum ScanStatus {
+  IN_PROGRESS
+  FAILED
+  SUCCESS
+}
+
 model Scan {
-  id           String   @id @default(uuid())
-  date         DateTime @default(now())
-  new_products Int      @default(0)
-  complete     Boolean  @default(false)
+  id           String     @id @default(uuid())
+  date         DateTime   @default(now())
+  new_products Int        @default(0)
+  status       ScanStatus @default(IN_PROGRESS)
+  message      String?    @db.Text
 
   @@map("scans")
 }
