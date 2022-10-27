@@ -1,4 +1,5 @@
 import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import DotenvPlugin from 'dotenv-webpack';
 // import CopyPlugin from 'copy-webpack-plugin';
 import HtmlPlugin from 'html-webpack-plugin';
 import { join } from 'path';
@@ -84,6 +85,7 @@ const config: WebpackConfiguration = {
     //     },
     //   ],
     // }),
+    new DotenvPlugin({ path: isDev ? './.env.dev' : './.env' }),
     ...(isDev ? [new ReactRefreshPlugin()] : []),
   ],
   devServer: {

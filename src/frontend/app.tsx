@@ -1,3 +1,3 @@
 export function App() {
-  return <div>app</div>;
+  return <div>{process.env.BACKEND_PORT}</div>;
 }
