@@ -5,6 +5,7 @@ import { injectable } from 'tsyringe';
 import { errorHandler } from '#/backend/middlewares/error-handler';
 import { HealthCheckRouter } from '#/backend/modules/healthcheck/healthcheck.router';
 import { ProductsRouter } from '#/backend/modules/products/products.router';
+import { Logger } from '#/backend/server/Logger';
 
 @injectable()
 export class Server {
@@ -25,7 +26,6 @@ export class Server {
   }
 
   start(port: number) {
-    // eslint-disable-next-line no-console
-    return this.app.listen(port, () => console.log(`server up @${port}`));
+    return this.app.listen(port, () => Logger.info(`🚀 server up @${port} 🚀`));
   }
 }
