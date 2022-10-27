@@ -21,10 +21,10 @@ model Product {
   imported_t   DateTime      @default(now())
   url          String
   product_name String
-  quantity     String?
-  categories   String?
-  packaging    String?
-  brands       String?
+  quantity     String?       @db.Text
+  categories   String?       @db.Text
+  packaging    String?       @db.Text
+  brands       String?       @db.Text
   image_url    String?
 
   @@map("products")
