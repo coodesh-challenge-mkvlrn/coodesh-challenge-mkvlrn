@@ -186,9 +186,11 @@ describe('products.services.ts', () => {
         createMock<PrismaClient>({
           product: {
             findUnique: jest.fn().mockResolvedValue(createMock<Product>()),
-            delete: jest
+            update: jest
               .fn()
-              .mockResolvedValue(createMock<Product>({ code: '123456' })),
+              .mockResolvedValue(
+                createMock<Product>({ code: '123456', status: 'TRASH' }),
+              ),
           },
         }),
       );
@@ -196,6 +198,7 @@ describe('products.services.ts', () => {
       const result = await service.deleteOne('123456');
 
       expect(result.code).toBe('123456');
+      expect(result.status).toBe('TRASH');
     });
 
     test('throws on db error', async () => {

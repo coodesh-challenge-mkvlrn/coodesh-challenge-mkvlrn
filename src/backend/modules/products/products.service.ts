@@ -71,7 +71,10 @@ export class ProductsService {
       if (!product)
         throw new AppError(ErrorType.NOT_FOUND, 'product not found in db');
 
-      return await this.orm.product.delete({ where: { code } });
+      return await this.orm.product.update({
+        where: { code },
+        data: { status: 'TRASH' },
+      });
     } catch (err) {
       if (err instanceof AppError) throw err;
 
