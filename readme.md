@@ -97,3 +97,9 @@ frontend em <http://localhost:3001>, backend em <http://localhost:4001>, docs op
 - [x] alerta em falha de sync no frontend
 - [x] documentação openapi
 - [x] unit tests (já tava ali em cima, mas aparece duas vezes nas instruções?)
+
+---
+
+## disclaimer
+
+eu **sei** que não deveria commitar `.env` e similares: é pra benefício do devops que vai quebrar a cabeça vendo meu código de alguma forma funcionar! 😅
