@@ -11,6 +11,7 @@
         "src/*"
       ]
     },
+    "rootDir": ".",
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,

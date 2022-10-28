@@ -1,4 +1,5 @@
 import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import { config as DotenvConfig } from 'dotenv';
 import DotenvPlugin from 'dotenv-webpack';
 // import CopyPlugin from 'copy-webpack-plugin';
 import HtmlPlugin from 'html-webpack-plugin';
@@ -6,6 +7,8 @@ import { join } from 'path';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import { Configuration } from 'webpack';
 import { Configuration as WConfiguration } from 'webpack-dev-server';
+
+DotenvConfig();
 
 const isDev = process.env.NODE_ENV === 'development';
 const srcDir = join(__dirname, 'src', 'frontend');
@@ -16,7 +19,7 @@ interface WebpackConfiguration extends Configuration {
 
 const config: WebpackConfiguration = {
   mode: `${process.env.NODE_ENV}` as 'development' | 'production',
-  entry: join(srcDir, 'index.tsx'),
+  entry: join(srcDir, 'main.tsx'),
   output: {
     path: join(__dirname, 'build', 'frontend'),
     publicPath: '/',
@@ -85,7 +88,7 @@ const config: WebpackConfiguration = {
     //     },
     //   ],
     // }),
-    new DotenvPlugin({ path: isDev ? './.env.dev' : './.env' }),
+    new DotenvPlugin(),
     ...(isDev ? [new ReactRefreshPlugin()] : []),
   ],
   devServer: {
