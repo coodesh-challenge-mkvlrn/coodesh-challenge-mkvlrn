@@ -18,7 +18,11 @@ export function App() {
 
   return (
     <Container>
-      <Info data={scan.data?.data || null} />
+      <Info
+        data={scan.data?.data || null}
+        refetch={products.refetch}
+        scanError={scan.error}
+      />
       <Table
         products={products.data?.data.data || []}
         refetch={products.refetch}
