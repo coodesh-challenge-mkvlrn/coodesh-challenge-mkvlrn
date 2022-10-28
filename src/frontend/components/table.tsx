@@ -14,10 +14,8 @@ export function Table({ products }: TableProps) {
       withBorder
       horizontalSpacing='sm'
       verticalSpacing='sm'
-      captionSide='top'
-      style={{ margin: '1rem' }}
+      mb='sm'
     >
-      <caption>coodesh challenge - mkvlrn@gmail.com</caption>
       <thead>
         <tr>
           <th>Name</th>
@@ -36,8 +34,16 @@ export function Table({ products }: TableProps) {
             <td>
               <Button>Details</Button>
             </td>
-            <td>
-              <Anchor href={product.url}>view page</Anchor>
+            <td align='center'>
+              <Anchor
+                href={product.url}
+                size='xl'
+                title='view page'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                <i className='fa-solid fa-square-up-right' />
+              </Anchor>
             </td>
           </tr>
         ))}

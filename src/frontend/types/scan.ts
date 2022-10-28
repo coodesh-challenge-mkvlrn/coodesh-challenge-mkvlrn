@@ -1,9 +1,3 @@
-export enum ScanStatus {
-  SUCCESS,
-  IN_PROGRESS,
-  FAILED,
-}
-
 export interface ScanResult {
   uptime: string;
   databaseOK: boolean;
@@ -15,7 +9,7 @@ export interface ScanResult {
   };
   lastScan: {
     date: Date;
-    status: ScanStatus;
+    status: 'SUCCESS' | 'FAILED' | 'IN_PROGRESS';
     new_products: number;
     message?: string;
   };
