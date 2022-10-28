@@ -76,6 +76,7 @@ frontend em <http://localhost:3001>, backend em <http://localhost:4001>
   - inspirado em, mas não 100% clean arch, usando DI (tsyringe)
   - prisma orm
   - documentação openapi gerada a partir de código/comments com swaggerJsdoc
+  - cron pra refetch de dados usando worker_thread pra não trancar a api
 - frontend
   - react, sem framework ou generator - webpack configurado manualmente
   - mantine como UI
