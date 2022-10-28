@@ -1,0 +1,32 @@
+name: coodesh-challenge-mkvlrn
+services:
+  dev-db:
+    image: mysql
+    restart: always
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - coodesh-challenge-mkvlrn-dev:/var/lib/mysql
+  db:
+    image: mysql
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - coodesh-challenge-mkvlrn:/var/lib/mysql
+  app:
+    depends_on:
+      - db
+    build:
+      context: .
+    restart: always
+    ports:
+      - 3000:3000
+      - 4000:4000
+volumes:
+  coodesh-challenge-mkvlrn:
+  coodesh-challenge-mkvlrn-dev:

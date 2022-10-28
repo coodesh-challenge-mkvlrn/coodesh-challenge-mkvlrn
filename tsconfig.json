@@ -22,7 +22,7 @@
     "moduleResolution": "node",
     "noEmit": true,
     "jsx": "react-jsx",
-    "removeComments": true,
+    "removeComments": false,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true

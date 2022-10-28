@@ -10,5 +10,5 @@ app.get('/', (_req: Request, res: Response) => {
   res.sendFile(join(__dirname, 'index.html'));
 });
 
-const PORT = +process.env.FRONTEND_PORT! || 3001;
+const PORT = +process.env.FRONTEND_PORT!;
 app.listen(PORT, () => console.log(`server up @${PORT}`));
