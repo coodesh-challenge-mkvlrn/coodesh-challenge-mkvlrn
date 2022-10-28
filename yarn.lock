@@ -2245,6 +2245,13 @@
     expect "^29.0.0"
     pretty-format "^29.0.0"
 
+"@types/jsbarcode@^3.11.1":
+  version "3.11.1"
+  resolved "https://registry.yarnpkg.com/@types/jsbarcode/-/jsbarcode-3.11.1.tgz#4850480d7aa2e40158d96cb72a1085c258376284"
+  integrity sha512-dFBoYmQ+s0cCkKG1OkXj84V+pbKfvR6MoY8d/PQiPXjdUokz87590X+PcG9FO82WCFf5ovd4eLASdCNy9a49gA==
+  dependencies:
+    "@types/node" "*"
+
 "@types/jsdom@^20.0.0":
   version "20.0.0"
   resolved "https://registry.npmjs.org/@types/jsdom/-/jsdom-20.0.0.tgz"
@@ -5841,6 +5848,11 @@ js-yaml@^4.1.0:
   integrity sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==
   dependencies:
     argparse "^2.0.1"
+
+jsbarcode@^3.11.5:
+  version "3.11.5"
+  resolved "https://registry.yarnpkg.com/jsbarcode/-/jsbarcode-3.11.5.tgz#390b3efd0271f35b9d68c7b8af6e972445969014"
+  integrity sha512-zv3KsH51zD00I/LrFzFSM6dst7rDn0vIMzaiZFL7qusTjPZiPtxg3zxetp0RR7obmjTw4f6NyGgbdkBCgZUIrA==
 
 jsdom@^20.0.0, jsdom@^20.0.1:
   version "20.0.1"

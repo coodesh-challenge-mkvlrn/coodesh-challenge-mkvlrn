@@ -1,5 +1,7 @@
 import { Anchor, Button, Table as MantineTable } from '@mantine/core';
+import { useState } from 'react';
 
+import { Modal } from '#/frontend/components/modal';
 import { Product } from '#/frontend/types/product';
 
 interface TableProps {
@@ -7,6 +9,14 @@ interface TableProps {
 }
 
 export function Table({ products }: TableProps) {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modProd, setModProd] = useState<Product | undefined>(undefined);
+
+  const openModal = (p: Product) => {
+    setModProd(p);
+    setModalOpen(true);
+  };
+
   return (
     <MantineTable
       striped
@@ -32,7 +42,7 @@ export function Table({ products }: TableProps) {
             <td>{product.status}</td>
             <td>{product.imported_t.toString()}</td>
             <td>
-              <Button>Details</Button>
+              <Button onClick={() => openModal(product)}>Details</Button>
             </td>
             <td align='center'>
               <Anchor
@@ -48,6 +58,11 @@ export function Table({ products }: TableProps) {
           </tr>
         ))}
       </tbody>
+      <Modal
+        opened={modalOpen}
+        onClose={() => setModalOpen(false)}
+        product={modProd}
+      />
     </MantineTable>
   );
 }
