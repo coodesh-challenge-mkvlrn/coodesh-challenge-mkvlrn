@@ -19,6 +19,7 @@ services:
     volumes:
       - coodesh-challenge-mkvlrn:/var/lib/mysql
   app:
+    image: mkvlrn/coodesh-challenge-mkvlrn:latest
     depends_on:
       - db
     build:
