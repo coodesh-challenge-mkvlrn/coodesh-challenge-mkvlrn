@@ -13,7 +13,9 @@ import {
   TextInput,
   Title,
 } from '@mantine/core';
-import { IconEdit } from '@tabler/icons';
+import { showNotification } from '@mantine/notifications';
+import { IconCircleCheck, IconEdit, IconX } from '@tabler/icons';
+import { AxiosError } from 'axios';
 import jsbarcode from 'jsbarcode';
 import { useEffect, useState } from 'react';
 
@@ -38,9 +40,21 @@ export function Modal({ opened, onClose, product }: ModalProps) {
       const response = await httpClient.put(`/products/${product?.code}`, {
         product_name: name,
       });
-      console.log(response);
+      showNotification({
+        title: `success - ${response.status}`,
+        message: 'product name updated!',
+        icon: <IconCircleCheck />,
+        color: 'green',
+      });
     } catch (err) {
-      console.log(err);
+      const error = err as AxiosError;
+      showNotification({
+        title: `error - ${error.response!.status}`,
+        // @ts-ignore - axios format
+        message: error.response?.data.message,
+        icon: <IconX />,
+        color: 'red',
+      });
     } finally {
       setLoading(false);
       setEdit(false);
@@ -118,11 +132,15 @@ export function Modal({ opened, onClose, product }: ModalProps) {
         <Group align='flex-end'>
           <TextInput
             value={name}
-            onChange={(e) => setName(e.currentTarget.value)}
+            onChange={(e) => setName(e.currentTarget.value.trim())}
             style={{ flex: 1 }}
             disabled={loading}
           />
-          <Button onClick={persistName} loading={loading}>
+          <Button
+            onClick={persistName}
+            loading={loading}
+            disabled={!name.length}
+          >
             OK
           </Button>
         </Group>
