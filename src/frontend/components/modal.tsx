@@ -14,7 +14,7 @@ import {
   Title,
 } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
-import { IconCircleCheck, IconEdit, IconX } from '@tabler/icons';
+import { IconCircleCheck, IconEdit, IconTrashX, IconX } from '@tabler/icons';
 import { AxiosError } from 'axios';
 import jsbarcode from 'jsbarcode';
 import { useEffect, useState } from 'react';
@@ -30,6 +30,7 @@ interface ModalProps {
 
 export function Modal({ opened, onClose, product }: ModalProps) {
   const [edit, setEdit] = useState(false);
+  const [del, setDel] = useState(false);
   const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
   const barcodeElement = document.getElementById('barcode');
@@ -58,6 +59,34 @@ export function Modal({ opened, onClose, product }: ModalProps) {
     } finally {
       setLoading(false);
       setEdit(false);
+      setDel(false);
+      onClose();
+    }
+  };
+
+  const trashProduct = async () => {
+    setLoading(true);
+    try {
+      const response = await httpClient.delete(`/products/${product?.code}`);
+      showNotification({
+        title: `success - ${response.status}`,
+        message: 'product trashed!',
+        icon: <IconCircleCheck />,
+        color: 'green',
+      });
+    } catch (err) {
+      const error = err as AxiosError;
+      showNotification({
+        title: `error - ${error.response!.status}`,
+        // @ts-ignore - axios format
+        message: error.response?.data.message,
+        icon: <IconX />,
+        color: 'red',
+      });
+    } finally {
+      setLoading(false);
+      setEdit(false);
+      setDel(false);
       onClose();
     }
   };
@@ -85,6 +114,9 @@ export function Modal({ opened, onClose, product }: ModalProps) {
           <Title order={3}>{product?.product_name}</Title>
           <ActionIcon onClick={() => setEdit(!edit)}>
             <IconEdit />
+          </ActionIcon>
+          <ActionIcon onClick={() => setDel(!del)}>
+            <IconTrashX color='red' />
           </ActionIcon>
         </Group>
       </Center>
@@ -142,6 +174,25 @@ export function Modal({ opened, onClose, product }: ModalProps) {
             disabled={!name.length}
           >
             OK
+          </Button>
+        </Group>
+      </Dialog>
+      <Dialog
+        opened={del}
+        withBorder
+        withCloseButton
+        size='lg'
+        radius='md'
+        onClose={() => setDel(false)}
+        position={{ top: 20, left: 20 }}
+      >
+        <Text mb='sm'>Confirm trashing of product?</Text>
+        <Group align='flex-end'>
+          <Button onClick={trashProduct} loading={loading}>
+            Yes
+          </Button>
+          <Button onClick={() => setDel(false)} loading={loading}>
+            No
           </Button>
         </Group>
       </Dialog>
