@@ -18,3 +18,11 @@ export interface Product {
   brands?: string;
   image_url?: string;
 }
+
+export interface ProductsResult {
+  totalProducts: number;
+  totalPages: number;
+  productsPerPage: number;
+  currentPage: number;
+  data: Product[];
+}

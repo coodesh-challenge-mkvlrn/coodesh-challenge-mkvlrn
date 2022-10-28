@@ -15,7 +15,7 @@ export function Table({ products }: TableProps) {
       horizontalSpacing='sm'
       verticalSpacing='sm'
       captionSide='top'
-      style={{ marginTop: '2rem' }}
+      style={{ margin: '1rem' }}
     >
       <caption>coodesh challenge - mkvlrn@gmail.com</caption>
       <thead>
