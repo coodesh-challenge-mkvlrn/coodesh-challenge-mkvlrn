@@ -12,7 +12,7 @@
     "prebackend:build": "npx rimraf build",
     "build": "yarn backend:build && yarn frontend:build",
     "backend:build": "npx tsc -p src/backend/tsconfig.build.json && npx tsc-alias -p src/backend/tsconfig.build.json",
-    "backend:dev": "dotenv -e .env -- npx nodemon --ext ts --ignore '**/*.spec.ts' --exec ts-node src/backend/index.ts",
+    "backend:dev": "dotenv -e .env -- npx nodemon --ext ts --ignore '**/*.spec.ts' --ignore 'src/frontend' --exec ts-node src/backend/index.ts",
     "frontend:build": "NODE_ENV=production webpack --no-stats && npx tsc -p src/frontend/tsconfig.build.json && npx tsc-alias -p src/frontend/tsconfig.build.json",
     "frontend:dev": "NODE_ENV=development webpack serve --no-stats",
     "test": "jest",
