@@ -33,7 +33,7 @@ docker compose build
 docker compose up -d
 ```
 
-frontend em <http://localhost:3000>, backend em <http://localhost:4000>
+frontend em <http://localhost:3000>, backend em <http://localhost:4000>, docs open api em <http://localhost:4000/docs>
 
 **ambiente dev, somete com db no container:**
 
@@ -45,8 +45,10 @@ yarn install
 docker compose up -d dev-db
 
 # migrations do db
-
 npx prisma migrate dev
+
+# unit tests
+yarn test
 
 # backend
 yarn backend:dev
@@ -55,7 +57,7 @@ yarn backend:dev
 yarn frontend:dev
 ```
 
-frontend em <http://localhost:3001>, backend em <http://localhost:4001>
+frontend em <http://localhost:3001>, backend em <http://localhost:4001>, docs open api em <http://localhost:4001/docs>
 
 ---
 
