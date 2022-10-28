@@ -1,7 +1,7 @@
 import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
 import { config as DotenvConfig } from 'dotenv';
 import DotenvPlugin from 'dotenv-webpack';
-// import CopyPlugin from 'copy-webpack-plugin';
 import HtmlPlugin from 'html-webpack-plugin';
 import { join } from 'path';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
@@ -80,14 +80,14 @@ const config: WebpackConfiguration = {
       filename: 'index.html',
       minify: !isDev,
     }),
-    // new CopyPlugin({
-    //   patterns: [
-    //     {
-    //       from: join(srcDir, 'assets'),
-    //       to: 'assets',
-    //     },
-    //   ],
-    // }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: join(srcDir, 'assets'),
+          to: 'assets',
+        },
+      ],
+    }),
     new DotenvPlugin(),
     ...(isDev ? [new ReactRefreshPlugin()] : []),
   ],
