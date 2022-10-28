@@ -19,7 +19,10 @@ export function App() {
   return (
     <Container>
       <Info data={scan.data?.data || null} />
-      <Table products={products.data?.data.data || []} />
+      <Table
+        products={products.data?.data.data || []}
+        refetch={products.refetch}
+      />
       <Pagination
         disabled={products.isLoading}
         position='center'

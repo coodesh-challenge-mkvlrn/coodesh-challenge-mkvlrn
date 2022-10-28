@@ -6,15 +6,21 @@ import { Product } from '#/frontend/types/product';
 
 interface TableProps {
   products: Product[];
+  refetch: () => Promise<any>;
 }
 
-export function Table({ products }: TableProps) {
+export function Table({ products, refetch }: TableProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const [modProd, setModProd] = useState<Product | undefined>(undefined);
 
   const openModal = (p: Product) => {
     setModProd(p);
     setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    refetch();
   };
 
   return (
@@ -58,11 +64,7 @@ export function Table({ products }: TableProps) {
           </tr>
         ))}
       </tbody>
-      <Modal
-        opened={modalOpen}
-        onClose={() => setModalOpen(false)}
-        product={modProd}
-      />
+      <Modal opened={modalOpen} onClose={closeModal} product={modProd} />
     </MantineTable>
   );
 }

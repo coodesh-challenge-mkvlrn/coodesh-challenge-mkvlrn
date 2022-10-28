@@ -1,17 +1,24 @@
 import {
+  ActionIcon,
+  Button,
   Center,
+  Dialog,
   Divider,
   Grid,
+  Group,
   Image,
   Modal as MantineModal,
   Stack,
   Text,
+  TextInput,
   Title,
 } from '@mantine/core';
+import { IconEdit } from '@tabler/icons';
 import jsbarcode from 'jsbarcode';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Product } from '#/frontend/types/product';
+import { httpClient } from '#/frontend/utils/http';
 
 interface ModalProps {
   opened: boolean;
@@ -20,12 +27,36 @@ interface ModalProps {
 }
 
 export function Modal({ opened, onClose, product }: ModalProps) {
+  const [edit, setEdit] = useState(false);
+  const [name, setName] = useState('');
+  const [loading, setLoading] = useState(false);
   const barcodeElement = document.getElementById('barcode');
+
+  const persistName = async () => {
+    setLoading(true);
+    try {
+      const response = await httpClient.put(`/products/${product?.code}`, {
+        product_name: name,
+      });
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+      setEdit(false);
+      onClose();
+    }
+  };
+
   useEffect(() => {
     if (barcodeElement) {
       jsbarcode('#barcode', product?.barcode!.split(' ')[0]!);
     }
   }, [product, barcodeElement]);
+
+  useEffect(() => {
+    if (product?.product_name) setName(product?.product_name);
+  }, [product, opened]);
 
   return (
     <MantineModal
@@ -36,9 +67,12 @@ export function Modal({ opened, onClose, product }: ModalProps) {
       size='xl'
     >
       <Center>
-        <Title order={3} mb='md'>
-          {product?.product_name}
-        </Title>
+        <Group spacing='xs' mb='md'>
+          <Title order={3}>{product?.product_name}</Title>
+          <ActionIcon onClick={() => setEdit(!edit)}>
+            <IconEdit />
+          </ActionIcon>
+        </Group>
       </Center>
       <Grid>
         <Grid.Col span={6}>
@@ -71,6 +105,28 @@ export function Modal({ opened, onClose, product }: ModalProps) {
           </Stack>
         </Grid.Col>
       </Grid>
+      <Dialog
+        opened={edit}
+        withBorder
+        withCloseButton
+        size='lg'
+        radius='md'
+        onClose={() => setEdit(false)}
+        position={{ top: 20, left: 20 }}
+      >
+        <Text>Edit product name</Text>
+        <Group align='flex-end'>
+          <TextInput
+            value={name}
+            onChange={(e) => setName(e.currentTarget.value)}
+            style={{ flex: 1 }}
+            disabled={loading}
+          />
+          <Button onClick={persistName} loading={loading}>
+            OK
+          </Button>
+        </Group>
+      </Dialog>
     </MantineModal>
   );
 }
