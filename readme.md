@@ -44,6 +44,10 @@ yarn install
 # db no container
 docker compose up -d dev-db
 
+# migrations do db
+
+npx prisma migrate dev
+
 # backend
 yarn backend:dev
 
